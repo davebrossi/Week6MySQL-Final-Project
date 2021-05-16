@@ -31,6 +31,9 @@ private ForumRepository forumRepository;
 	@Override
 	public void deleteForum(Forum forum) {
 		forumRepository.deleteForum(forum);
-
+	}
+	@Override
+	public void updateForum(Forum forum) {
+		forumRepository.updateForum(forum);
 	}
 }

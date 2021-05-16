@@ -11,4 +11,5 @@ public interface IForumService {
 	Forum getForum(int forumId);
 	void createForum(Forum forum);
 	void deleteForum(Forum forum);
+	void updateForum(Forum forum);
 }

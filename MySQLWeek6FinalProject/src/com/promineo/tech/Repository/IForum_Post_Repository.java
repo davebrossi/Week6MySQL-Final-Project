@@ -9,5 +9,6 @@ public interface IForum_Post_Repository {
 	Forum_Post getForum_Post(int forum_post_Id);
 	void createForum_Post(Forum_Post forum_post);
 	void deleteForum_Post(Forum_Post forum_post);
+	void updateForum_Post(Forum_Post forum_post);
 }
 

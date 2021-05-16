@@ -9,4 +9,5 @@ public interface IUserRepository {
 	User getUser(int userId);
 	void createUser(User user);
 	void deleteUser(User user);
+	void updateUser(User user);
 }

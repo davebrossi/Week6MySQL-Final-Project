@@ -16,12 +16,18 @@ public class Forum {
 	{
 		return Id;
 	}
-	
+	public void setForumName(String forumName)
+	{
+		ForumName = forumName;
+	}
 	public String getForumName()
 	{
 		return ForumName;
 	}
-	
+	public void setForumDescript(String forumDescript)
+	{
+		ForumDescript = forumDescript;
+	}	
 	public String getForumDescript()
 	{
 		return ForumDescript;

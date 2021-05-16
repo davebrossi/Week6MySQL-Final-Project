@@ -30,7 +30,10 @@ private Forum_Post_Repository forum_Post_Repository;
 	@Override
 	public void deleteForum_Post(Forum_Post forum_Post) {
 		forum_Post_Repository.deleteForum_Post(forum_Post);
-
+	}
+	@Override
+	public void updateForum_Post(Forum_Post forum_post) {
+		forum_Post_Repository.updateForum_Post(forum_post);
 	
 }
 }

@@ -1,161 +1,146 @@
 package com.promineo.tech.User;
 
-import java.util.ArrayList;
 
-import com.promineo.tech.Models.Forum_Post;
-import com.promineo.tech.Models.Forum;
-import com.promineo.tech.Models.User;
-import com.promineo.tech.Service.UserService;
-import com.promineo.tech.Service.ForumService;
-import com.promineo.tech.Service.Forum_Post_Service;
+import java.util.Scanner;
+
+
+import com.promineo.tech.Models.RennlistMenuModel;
+
+import com.promineo.tech.Service.RennlistConsoleService;
 
 
 public class RennlistConsole {
-
-	@SuppressWarnings("unused")
+	private static RennlistMenuModel viewModel;
+	private static Scanner scanner;
 	public static void main(String[] args) {
-		//Application for CRUD system, User, Forum, Forum Post (Console)
-		try
-		{
-			UserService userService = new UserService();
-			
-			//Create 3 Users
-			System.out.println("Creating 3 new users...");
-			userService.createUser(new User(0, "Manish", "Narayan"));
-			userService.createUser(new User(0, "Elizabeth", "Rossi"));
-			userService.createUser(new User(0, "Adam", "Brown"));
-			
-			//Get All Users
-			System.out.println("Reading all Users...");
-			ArrayList<User> user = userService.getUser();
-			for (User users : user)
-			{
-				System.out.println(user);
-			}
-			
-			//Get User by Id = 2
-			System.out.println("Getting User with Id = 2...");
-			User users = userService.getUser(2);
-			if(user != null)
-			{
-				System.out.println(user);
-			}
-			else
-			{
-				System.out.println("User does not exist");
-			}
-			
-			//Delete User by Id = 3
-			System.out.println("Deleting User With Id = 3...");
-			User user3 = userService.getUser(3);
-			if(user3 != null)
-			{
-				userService.deleteUser(user3);
-			}
-			else
-			{
-				System.out.println("User does not exist");
-			}
-			
 
+		System.out.println("Welcome to Rennlist; where you'll be mocked for the Porsche you own!");
+		
+		try
+		{
+			scanner = new Scanner(System.in);
+			
+			do
+			{
+				viewModel = new RennlistMenuModel();
+				DisplayMainMenu();
+				if(scanner.hasNextInt())
+				{
+					viewModel.mainMenuChoice = scanner.nextInt();
+				}
+				DisplayCrudMenu();
+				if(scanner.hasNextInt())
+				{
+					viewModel.crudChoice = scanner.nextInt();
+				}
+				DisplayDetailsScreen();
+				
+				RennlistConsoleService rennlistService = new RennlistConsoleService(viewModel);
+				rennlistService.StartRennlistService();
+				
+			} 
+			while(viewModel.mainMenuChoice != 4);	
+			
+			scanner.close();
 		}
 		catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
+			scanner.close();
 		}
-		try
-		{
-			ForumService forumService = new ForumService();
-			
-			//Create 3 forums
-			System.out.println("Creating 3 new forums...");
-			forumService.createForum(new Forum(0, "Air Cooled", "911/912/914 Porsches"));
-			forumService.createForum(new Forum(0, "Early Water Cooled", "924/944/968 Porsches"));
-			forumService.createForum(new Forum(0, "Cayennes", "955/957/958 Cayennes"));
-			
-			//Get All forums
-			System.out.println("Reading all forums...");
-			ArrayList<Forum> forum = forumService.getForum();
-			for (Forum forums : forum)
-			{
-				System.out.println(forum);
-			}
-			
-			//Get forum by Id = 2
-			System.out.println("Getting forum with forum Id = 2...");
-			Forum forums = forumService.getForum(2);
-			if(forum != null)
-			{
-				System.out.println(forum);
-			}
-			else
-			{
-				System.out.println("Forum does not exist");
-			}
-			
-			//Delete forum by Id = 3
-			System.out.println("Deleting forum with forum Id = 3...");
-			Forum forum3 = forumService.getForum(3);
-			if(forum3 != null)
-			{
-				forumService.deleteForum(forum3);
-			}
-			else
-			{
-				System.out.println("Forum does not exist");
-			}
-			
-		}
-		catch(Exception ex)
-		{
-			System.out.println(ex.getMessage());
-		}
-		try
-		{
-			Forum_Post_Service forum_Post_Service = new Forum_Post_Service();
-			
-			//Create 3 Forum Posts
-			System.out.println("Creating 3 new Forum Posts...");
-			forum_Post_Service.createForum_Post(new Forum_Post(0, "914s are cool", "Seriously if they were not rusted they rock"));
-			forum_Post_Service.createForum_Post(new Forum_Post(0, "957 bore scoring is bad", "everything because Porsche cannot line cylinders"));
-			forum_Post_Service.createForum_Post(new Forum_Post(0, "924 turbos need more love", "their warmup regulators suck but 931s are great"));
-			
-			//Get All Forum Posts
-			System.out.println("Reading all Forum Posts...");
-			ArrayList<Forum_Post> forum_post = forum_Post_Service.getForum_Post();
-			for (Forum_Post forum_posts : forum_post)
-			{
-				System.out.println(forum_post);
-			}
-			
-			//Get Forum Posts by Id = 2
-			System.out.println("Getting the Forum Post with Id = 2...");
-			Forum_Post forum_posts = forum_Post_Service.getForum_Post(2);
-			if(forum_post != null)
-			{
-				System.out.println(forum_post);
-			}
-			else
-			{
-				System.out.println("That Forum Post does not exist");
-			}
-			
-			//Delete Forum Post by Id = 3
-			System.out.println("Deleting the Forum Post with Id = 3...");
-			Forum_Post forum_post3 = forum_Post_Service.getForum_Post(3);
-			if(forum_post3 != null)
-			{
-				forum_Post_Service.deleteForum_Post(forum_post3);
-			}
-			else
-			{
-				System.out.println("Forum Post does not exist");
+	}
 
-		}
-		}
-		catch(Exception ex)
+	private static void DisplayMainMenu()
+	{
+		System.out.println("Main Menu");
+		System.out.println("1. Users");
+		System.out.println("2. Forums");
+		System.out.println("3. Forum Posts");
+		System.out.println("4. Exit");
+	}
+	
+	private static void DisplayCrudMenu()
+	{
+		System.out.println("Please choose from the Menu options available on this subject");
+		System.out.println("1. Create");
+		System.out.println("2. Read");
+		System.out.println("3. Update");
+		System.out.println("4. Delete");
+	}
+	
+	private static void DisplayDetailsScreen()
+	{
+		switch (viewModel.mainMenuChoice) 
 		{
-			System.out.println(ex.getMessage());
+			case 1:
+				switch (viewModel.crudChoice)
+				{
+					case 1:
+						System.out.println("Enter User First Name: ");
+						viewModel.firstName = scanner.next();
+						System.out.println("Enter User Last Name: ");
+						viewModel.lastName = scanner.next();
+						break;
+					case 3:
+						System.out.println("Enter User Id: ");
+						viewModel.UserId = scanner.nextInt();
+						System.out.println("Enter User's First Name: ");
+						viewModel.firstName = scanner.next();
+						System.out.println("Enter User's Last Name: ");
+						viewModel.lastName = scanner.next();
+						break;
+					case 4:
+						System.out.println("Enter User Id: ");
+						viewModel.UserId = scanner.nextInt();
+						break;
+				}
+				break;
+			case 2:
+				switch (viewModel.crudChoice)
+				{
+					case 1:
+						System.out.println("Enter Forum Name: ");
+						viewModel.forumName = scanner.next();
+						System.out.println("Enter Forum Description: ");
+						viewModel.forumDescript = scanner.next();
+						break;
+					case 3:
+						System.out.println("Enter Forum Id: ");
+						viewModel.ForumID = scanner.nextInt();
+						System.out.println("Enter Forum Name: ");
+						viewModel.forumName = scanner.next();
+						System.out.println("Enter Forum Description: ");
+						viewModel.forumDescript = scanner.next();
+						break;
+					case 4:
+						System.out.println("Enter Forum Id: ");
+						viewModel.ForumID = scanner.nextInt();
+						break;
+				}
+				break;
+			case 3:
+				switch (viewModel.crudChoice)
+				{
+					case 1:
+						System.out.println("Enter the name of your post: ");
+						viewModel.postTitle = scanner.next();
+						System.out.println("What do you want to say in your post? ");
+						viewModel.postBody = scanner.next();
+						break;
+					case 3:
+						System.out.println("Enter the Forum Post Id: ");
+						viewModel.forum_post_ID = scanner.nextInt();
+						System.out.println("Enter the name of your post: ");
+						viewModel.postTitle = scanner.next();
+						System.out.println("What do you want to say in your post?");
+						viewModel.postBody = scanner.next();
+						break;
+					case 4:
+						System.out.println("Enter the Forum Post Id: ");
+						viewModel.forum_post_ID = scanner.nextInt();
+						break;
+				}
+				break;
 		}
 	}
 }

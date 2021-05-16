@@ -32,7 +32,10 @@ private UserRepository userRepository;
 	@Override
 	public void deleteUser(User user) {
 		userRepository.deleteUser(user);
-
+	}
+	@Override
+	public void updateUser(User user) {
+		userRepository.updateUser(user);
 	}
 	
 }

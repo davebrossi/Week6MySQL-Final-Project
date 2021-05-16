@@ -97,8 +97,21 @@ public class UserRepository extends MySqlRepository implements IUserRepository {
 			System.out.println(ex.getMessage());
 		}
 	}
-
-
+	@Override
+	public void updateUser(User user) {
+		try
+		{
+			CallableStatement st = connection.prepareCall("{call updateUser(?, ?, ?)}");
+			st.setInt(1, user.getId());
+			st.setString(2, user.getFirstName());
+			st.setString(3, user.getLastName());
+			st.execute();
+		}
+		catch(SQLException ex)
+		{
+			System.out.println(ex.getMessage());
+			
+		}
 		
 	}
-
+}

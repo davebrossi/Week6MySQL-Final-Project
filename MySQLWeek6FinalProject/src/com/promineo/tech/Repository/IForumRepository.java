@@ -9,5 +9,6 @@ public interface IForumRepository {
 	Forum getForum(int ForumId);
 	void createForum(Forum forum);
 	void deleteForum(Forum forum);
+	void updateForum(Forum forum);
 }
 

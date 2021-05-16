@@ -96,5 +96,20 @@ public class ForumRepository extends MySqlRepository implements IForumRepository
 			System.out.println(ex.getMessage());
 		}
 	}
-}
 
+	@Override
+	public void updateForum(Forum forum) {
+		try
+		{
+			CallableStatement st = connection.prepareCall("{call updateForum(?, ?, ?)}");
+			st.setInt(1, forum.getId());
+			st.setString(1, forum.getForumName());
+			st.setString(2, forum.getForumDescript());
+			st.execute();
+		}
+		catch(SQLException ex)
+		{
+			System.out.println(ex.getMessage());
+}
+	}
+}

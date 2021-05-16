@@ -9,5 +9,5 @@ public interface IUserService {
 	User getUser(int userId);
 	void createUser(User user);
 	void deleteUser(User user);
-
+	void updateUser(User user);
 }
