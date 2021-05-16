@@ -7,7 +7,7 @@ import com.promineo.tech.Models.User;
 import com.promineo.tech.Models.Forum;
 import com.promineo.tech.Models.RennlistMenuModel;
 
-public class RennlistConsoleService {
+public class RennlistConsoleService implements IRennlistConsoleService{
 	private RennlistMenuModel viewModel;
 	private UserService userService;
 	private ForumService forumService;
@@ -20,23 +20,23 @@ public class RennlistConsoleService {
 		forumService = new ForumService();
 		forum_postService = new Forum_Post_Service();
 	}
-	
-	public void StartRennlistService()
+	@Override
+	public void StartRennlistConsoleService() 
 	{
 		User user;
 		Forum forum;
 		Forum_Post forum_post;
 		
-		switch (viewModel.mainMenuChoice)
+		switch (viewModel.MainMenuChoice)
 		{
-			case 1:
-				switch (viewModel.crudChoice) 
+			case USER:
+				switch (viewModel.CrudChoice) 
 				{
-					case 1:
+					case CREATE:
 						userService.createUser(new User(0, viewModel.firstName, viewModel.lastName));
 						System.out.println("User has been created");
 						break;
-					case 2:
+					case READ :
 						System.out.println("Current Users on file");
 						ArrayList<User> users = userService.getUser();
 						for (User s : users)
@@ -44,7 +44,7 @@ public class RennlistConsoleService {
 							System.out.println(s);
 						}
 						break;
-					case 3:
+					case UPDATE :
 						user = userService.getUser(viewModel.UserId);
 						if(user != null)
 						{
@@ -58,7 +58,7 @@ public class RennlistConsoleService {
 							System.out.println("User not found");
 						}
 						break;
-					case 4:
+					case DELETE :
 						user = userService.getUser(viewModel.UserId);
 						if(user != null)
 						{
@@ -75,14 +75,14 @@ public class RennlistConsoleService {
 						break;
 				}
 				break;
-			case 2:
-				switch (viewModel.crudChoice) 
+			case FORUM :
+				switch (viewModel.CrudChoice) 
 				{
-					case 1:
+					case CREATE:
 						forumService.createForum(new Forum(0, viewModel.forumName, viewModel.forumDescript));
 						System.out.println("Forum has been established");
 						break;
-					case 2:
+					case READ:
 						System.out.println("Current Forums Operational");
 						ArrayList<Forum> forums = forumService.getForum();
 						for (Forum t : forums)
@@ -90,7 +90,7 @@ public class RennlistConsoleService {
 							System.out.println(t);
 						}
 						break;
-					case 3:
+					case UPDATE:
 						forum = forumService.getForum(viewModel.ForumID);
 						if(forum != null)
 						{
@@ -104,7 +104,7 @@ public class RennlistConsoleService {
 							System.out.println("Forum not found.");
 						}
 						break;
-					case 4:
+					case DELETE:
 						forum = forumService.getForum(viewModel.ForumID);
 						if(forum != null)
 						{
@@ -121,14 +121,14 @@ public class RennlistConsoleService {
 						break;
 				}
 				break;
-			case 3:
-				switch (viewModel.crudChoice) 
+			case FORUM_POST:
+				switch (viewModel.CrudChoice) 
 				{
-					case 1:
+					case CREATE:
 						forum_postService.createForum_Post(new Forum_Post(0, viewModel.postTitle, viewModel.postBody));
 						System.out.println("Your Forum Post has been submitted.");
 						break;
-					case 2:
+					case READ:
 						System.out.println("List of active forum threads.");
 						ArrayList<Forum_Post> forum_posts = forum_postService.getForum_Post();
 						for (Forum_Post c : forum_posts)
@@ -136,7 +136,7 @@ public class RennlistConsoleService {
 							System.out.println(c);
 						}
 						break;
-					case 3:
+					case UPDATE:
 						forum_post = forum_postService.getForum_Post(viewModel.forum_post_ID);
 						if(forum_post != null)
 						{
@@ -150,7 +150,7 @@ public class RennlistConsoleService {
 							System.out.println("Forum Post not found.");
 						}
 						break;
-					case 4:
+					case DELETE:
 						forum_post = forum_postService.getForum_Post(viewModel.forum_post_ID);
 						if(forum_post != null)
 						{
@@ -173,4 +173,5 @@ public class RennlistConsoleService {
 		}
 		
 	}
-}
+		
+	}
