@@ -4,39 +4,35 @@ public class Forum {
 	private int Id;
 	private String ForumName;
 	private String ForumDescript;
-	
-	public Forum(int id, String forumName, String forumDescript)
-	{
+
+	public Forum(int id, String forumName, String forumDescript) {
 		Id = id;
 		ForumName = forumName;
 		ForumDescript = forumDescript;
 	}
-	
-	public int getId()
-	{
+
+	public int getId() {
 		return Id;
 	}
-	public void setForumName(String forumName)
-	{
+
+	public void setForumName(String forumName) {
 		ForumName = forumName;
 	}
-	public String getForumName()
-	{
+
+	public String getForumName() {
 		return ForumName;
 	}
-	public void setForumDescript(String forumDescript)
-	{
+
+	public void setForumDescript(String forumDescript) {
 		ForumDescript = forumDescript;
-	}	
-	public String getForumDescript()
-	{
+	}
+
+	public String getForumDescript() {
 		return ForumDescript;
 	}
-	
-			
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "ForumId: " + Id + ", ForumName: " + ForumName + ", ForumDescript: " + ForumDescript;
 	}
 }

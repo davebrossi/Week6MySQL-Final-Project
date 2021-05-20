@@ -6,16 +6,14 @@ import com.promineo.tech.Models.User;
 import com.promineo.tech.Repository.UserRepository;
 
 public class UserService implements IUserService {
-private UserRepository userRepository;
-	
-	public UserService()
-	{
+	private UserRepository userRepository;
+
+	public UserService() {
 		userRepository = new UserRepository();
 	}
-	
+
 	@Override
-	public ArrayList<User> getUser()
-	{
+	public ArrayList<User> getUser() {
 		return userRepository.getUser();
 	}
 
@@ -33,9 +31,10 @@ private UserRepository userRepository;
 	public void deleteUser(User user) {
 		userRepository.deleteUser(user);
 	}
+
 	@Override
 	public void updateUser(User user) {
 		userRepository.updateUser(user);
 	}
-	
+
 }
